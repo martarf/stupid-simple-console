@@ -4,7 +4,28 @@
 
 <ul>
     {% for server in servers %}
-    <li>{{ server.name }}</li>
+    <div class="row">
+        <div class="col-md-4 panel {% if server.isOnline %} panel-success {% else %} panel-danger {% endif %}">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    {% if server.isOnline %}
+                    <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
+                    {% else %}
+                    <span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>
+                    {% endif %}
+                    {{ server.name}}
+                </h3>
+            </div>
+            <div class="panel-body">
+                {% if server.isGroup %}
+                     Active servers: {{ server.numActive}}
+                {% else %}
+                    We have a problem here...
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
     {% endfor %}
 </ul>
 
