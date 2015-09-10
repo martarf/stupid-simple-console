@@ -9,11 +9,11 @@ class ServerStatus
     private $isGroup;
     private $numActive;
 
-    public __construct(
+    public function __construct(
         $name,
         $isOnline,
         $isGroup,
-        $numActive,
+        $numActive
     )
     {
         $this->name = (string)$name;
@@ -22,13 +22,35 @@ class ServerStatus
         $this->numActive = (int)$numActive;
     }
 
+    /**
+     * @return string
+     */
     public function name()
     {
         return $this->name;
     }
 
+    /**
+     * @return bool
+     */
     public function isOnline()
     {
         return $this->isOnline;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isGroup()
+    {
+        return $this->isGroup;
+    }
+
+    /**
+     * @return int
+     */
+    public function numActive()
+    {
+        return $this->numActive;
     }
 }
