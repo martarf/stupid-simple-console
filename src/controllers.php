@@ -31,6 +31,11 @@ $app->error(function (\Exception $e, $code) use ($app) {
 });
 
 $app->get('/{project}/servers', function($project) use ($app) {
-    $servers = $app['AWSFetcher']->getServerListForProject($project);
-    return $app['twig']->render('serverlist.html', ['servers' => $servers])
-})
+    //$servers = $app['AWSFetcher']->getServerListForProject($project);
+    $server1 = new \PNWPHP\SSC\Data\ServerStatus("server1",true,true,1);
+    $server2 = new \PNWPHP\SSC\Data\ServerStatus("server2",true,true,2);
+    $server3 = new \PNWPHP\SSC\Data\ServerStatus("server3",true,true,3);
+    $server4 = new \PNWPHP\SSC\Data\ServerStatus("server4",true,true,4);
+    $servers = [$server1,$server2,$server3,$server4];
+    return $app['twig']->render('serverlist.html', ['servers' => $servers]);
+});

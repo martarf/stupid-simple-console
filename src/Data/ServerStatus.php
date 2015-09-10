@@ -9,11 +9,11 @@ class ServerStatus
     private $isGroup;
     private $numActive;
 
-    public __construct(
+    public function __construct(
         $name,
         $isOnline,
         $isGroup,
-        $numActive,
+        $numActive
     )
     {
         $this->name = (string)$name;
