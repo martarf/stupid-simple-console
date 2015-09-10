@@ -20,7 +20,9 @@
         "symfony/security": "~2.3",
         "symfony/translation": "~2.3",
         "symfony/twig-bridge": "~2.3",
-        "symfony/validator": "~2.3"
+        "symfony/validator": "~2.3",
+        "aws/aws-sdk-php": "^3.3",
+        "aws/aws-sdk-php-silex": "^2.0"
     },
     "autoload": {
         "psr-4": { "PNWPHP\\SSC\\": "src/" }
