@@ -29,3 +29,8 @@ $app->error(function (\Exception $e, $code) use ($app) {
 
     return new Response($app['twig']->resolveTemplate($templates)->render(array('code' => $code)), $code);
 });
+
+$app->get('/{project}/servers', function($project) use ($app) {
+    $servers = $app['AWSFetcher']->getServerListForProject($project);
+    return $app['twig']->render('serverlist.html', ['servers' => $servers])
+})

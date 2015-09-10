@@ -17,4 +17,8 @@ $app['twig'] = $app->share($app->extend('twig', function ($twig, $app) {
     return $twig;
 }));
 
+$app['AWSFetcher'] = $app->share(function() use ($app) {
+    return new PNWPHP\SSC\Service\AWSFetcher();
+});
+
 return $app;
