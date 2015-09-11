@@ -23,21 +23,19 @@ class AWSFetcher
      */
     public function getServerListForProject($projectId)
     {
-        //$sql =
-            //'SELECT `Server`.`Server_Name` as `name`, `Server`.`ARN` as `arn`, `Server`.`Type` as `type` ' .
-            //'FROM `Server` WHERE `Server`.`arn` in ' .
-            //'(SELECT `Project_Server`.`arn` FROM `Project_Server` WHERE `Project_Server`.`Project_ID` = :pid)';
+        $sql =
+            'SELECT * FROM servers WHERE servers.arn in '.
+            '( SELECT arn FROM project_server WHERE project_id = :pid )';
 
-        //try{
-            //$query = $this->pdo->prepare($sql);
-            //$query->execute(['pid' => $projectId]);
-            //$data = $query->fetchAll(\PDO::FETCH_ASSOC);
-        //} catch(\PDOException $e) {
-            //// TODO: Fail safe
-            //throw $e;
-        //}
+        try{
+            $query = $this->pdo->prepare($sql);
+            $query->execute(['pid' => $projectId]);
+            $data = $query->fetchAll(\PDO::FETCH_ASSOC);
+        } catch(\PDOException $e) {
+            // TODO: Fail safe
+            throw $e;
+        }
 
-        $data = [];
         $singleServers = array_filter($data, function($s) {
             return $s['type'] === 'single';
         });

@@ -13,12 +13,20 @@ class AutoScalingService
 
     public function getStatusList(array $grouplist)
     {
+        $arnsWanted = array_map(function($g) {
+            return $g['arn'];
+        }, $grouplist);
+
         $data = $this->asg->describeAutoScalingGroups();
 
         $groups = $data['AutoScalingGroups'];
 
         // TODO: filter based on input
-        return array_map(function($g){return $this->processGroup($g);}, $groups);
+        $processed = array_map(function($g){return $this->processGroup($g);}, $groups);
+
+        return array_filter($processed, function($g) use ($arnsWanted) {
+            return in_array($g['arn'], $arnsWanted);
+        });
     }
 
     private function processGroup($group)

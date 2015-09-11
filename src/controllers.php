@@ -5,11 +5,15 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Core\User\User;
 
 //Request::setTrustedProxies(array('127.0.0.1'));
 
 $app->get('/', function() use ($app) {
-
+    $user = $app['security.token_storage']->getToken()->getUser();
+    if($user instanceof User) {
+        return $app->redirect('/projects');
+    }
     return $app['twig']->render('index.html', array(
         'error' => $app['security.last_error']($app['request']),
         'last_username' => $app['session']->get('_security.last_username'),
@@ -17,6 +21,14 @@ $app->get('/', function() use ($app) {
 })
 ->bind('homepage')
 ;
+
+$app->get('/projects', function() use ($app) {
+    $user = $app['security.token_storage']->getToken()->getUser();
+    $projects = $app['UserService']->getProjectsForUser($user);
+    return $app['twig']->render('projects.html', array(
+        'projects' => $projects
+    ));
+});
 
 $app->get('/logout', function() use ($app) {
     $app['session']->clear();
@@ -42,7 +54,7 @@ $app->error(function (\Exception $e, $code) use ($app) {
     return new Response($app['twig']->resolveTemplate($templates)->render(array('code' => $code)), $code);
 });
 
-$app->get('projects/{project_id}/servers', function($project_id) use ($app) {
+$app->get('{project_id}/servers', function($project_id) use ($app) {
     $servers  = $app['AWSFetcher']->getServerListForProject($project_id);
     $user = $app['security.token_storage']->getToken()->getUser();
     $projects = $app['UserService']->getProjectsForUser($user);

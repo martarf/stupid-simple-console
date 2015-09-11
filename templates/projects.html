@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<ul>
+    {% for project in projects %}
+    <div class="row">
+        {{project.name}}
+    </div>
+    {% endfor %}
+</ul>
+
+{% endblock %}

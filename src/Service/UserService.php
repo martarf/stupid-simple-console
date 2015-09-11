@@ -30,7 +30,6 @@ class UserService implements UserProviderInterface
             // TODO: Fail safe
             throw $e;
         }
-
         if($user === null) {
              throw new \Exception('You shall not pass!!!');
         }
