@@ -10,10 +10,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 $app->get('/', function() use ($app) {
 
-    if ($app['security']->isGranted('IS_AUTHENTICATED_ANONYMOUSLY')) {
-        return $app->redirect('/project1/servers');
-    }
-
     return $app['twig']->render('index.html', array(
         'error' => $app['security.last_error']($app['request']),
         'last_username' => $app['session']->get('_security.last_username'),

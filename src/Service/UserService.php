@@ -31,7 +31,7 @@ class UserService implements UserProviderInterface
     }
 
     public function getProjectsForUser($username){
-        return ["project1","project1","project1","xfiles"];
+        return ['1', '2', '3', '4'];
     }
 
     public function refreshUser(UserInterface $user)
