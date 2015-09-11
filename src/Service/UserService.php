@@ -11,7 +11,6 @@ use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 
 class UserService implements UserProviderInterface
 {
-    //private $conn;
 
     public function __construct($connection)
     {
@@ -25,11 +24,14 @@ class UserService implements UserProviderInterface
         if (!$user = $stmt->fetch()) {
             throw new UsernameNotFoundException(sprintf('Username "%s" does not exist.', $username));
         }*/
-        $user['username']='admin';
+        $user['username']='user';
         $user['password']='5FZ2Z8QIkA7UTZ4BYkoC+GsReLf569mSKDsfods6LYQ8t+a8EW9oaircfMpmaLbPBh4FOBiiFyLfuZmTSUwzZg==';
         $user['roles'] = "ROLE_USER";
-
         return new User($user['username'], $user['password'], explode(',', $user['roles']), true, true, true, true);
+    }
+
+    public function getProjectsForUser($username){
+        return ["project1","project1","project1","xfiles"];
     }
 
     public function refreshUser(UserInterface $user)

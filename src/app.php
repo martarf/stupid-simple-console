@@ -57,7 +57,7 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
                 'invalidate_session' => false
             ),
             'users' => $app->share(function($app) {
-                return new PNWPHP\SSC\Service\UserService($app['db']);
+                return new PNWPHP\SSC\Service\UserService($app);
             }),
         )
     ),
