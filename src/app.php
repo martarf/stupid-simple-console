@@ -1,7 +1,5 @@
 <?php
 
-require dirname(__DIR__) . '/vendor/autoload.php';
-
 use Aws\Silex\AwsServiceProvider;
 use Herrera\Pdo\PdoServiceProvider;
 use Silex\Application;
