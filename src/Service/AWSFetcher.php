@@ -2,6 +2,8 @@
 
 namespace PNWPHP\SSC\Service;
 
+use PNWPHP\SSC\Data\ServerStatus;
+
 class AWSFetcher
 {
     private $pdo;
@@ -24,33 +26,41 @@ class AWSFetcher
             'FROM `Server` WHERE `Server`.`arn` in ' .
             '(SELECT `Project_Server`.`arn` FROM `Project_Server` WHERE `Project_Server`.`Project_ID` = :pid)';
 
-        try{
-            $query = $this->pdo->prepare($sql);
-            $query->execute(['pid' => $projectId]);
-            $data = $query->fetchAll(\PDO::FETCH_COLUMN);
-        } catch(\PDOException $e) {
-            // TODO: Fail safe
-            throw $e;
-        }
+//        try{
+//            $query = $this->pdo->prepare($sql);
+//            $query->execute(['pid' => $projectId]);
+//            $data = $query->fetchAll(\PDO::FETCH_COLUMN);
+//        } catch(\PDOException $e) {
+//            // TODO: Fail safe
+//            throw $e;
+//        }
+//
+//        $singleServers = array_filter($data, function($s) {
+//            return $s['type'] === 'single';
+//        });
+//
+//        $groupServers = array_filter($data, function($s) {
+//            return $s['type'] === 'group';
+//        });
 
-        $singleServers = array_filter($data, function($s) {
-            return $s['type'] === 'single';
-        });
-
-        $groupServers = array_filter($data, function($s) {
-            return $s['type'] === 'group';
-        });
+        $singleServers = [[
+            "arn" => "abcde",
+            "name" => "test server",
+            "type" => 1
+        ]];
+        $groupServers = [];
+        $groupStatus = [];
 
         $singleStatus = $this->ec2->getStatusList($singleServers);
-        $groupStatus = $this->asg->getStatusList($groupServers);
+//        $groupStatus = $this->asg->getStatusList([]);
 
         $singleStatus = array_map(function($status) {
              return new ServerStatus($status['name'], $status['status'], false, 1);
         }, $singleStatus);
 
-        $groupStatus = array_map(function($status) {
-             return new ServerStatus($status['name'], $status['status'], true, $status['count']);
-        }, $singleStatus);
+//        $groupStatus = array_map(function($status) {
+//             return new ServerStatus($status['name'], $status['status'], true, $status['count']);
+//        }, $singleStatus);
 
         return array_merge($singleStatus, $groupStatus);
     }

@@ -10,9 +10,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 $app->get('/', function() use ($app) {
 
-    if ($app['security']->isGranted('IS_AUTHENTICATED_ANONYMOUSLY')) {
-        return $app->redirect('/project1/servers');
-    }
+//
 
     return $app['twig']->render('index.html', array(
         'error' => $app['security.last_error']($app['request']),
@@ -46,10 +44,10 @@ $app->error(function (\Exception $e, $code) use ($app) {
     return new Response($app['twig']->resolveTemplate($templates)->render(array('code' => $code)), $code);
 });
 
-$app->get('/{project_id}/servers', function($project_id) use ($app) {
+$app->get('projects/{project_id}/servers', function($project_id) use ($app) {
     $servers  = $app['AWSFetcher']->getServerListForProject($project_id);
-    $username = $app['security.token_storage']->getToken()->getUser()->getUsername();
-    $userservice = new \PNWPHP\SSC\Service\UserService($app['db']);
-    $projects = $userservice->getProjectsForUser($username);
-    return $app['twig']->render('serverlist.html', ['servers' => $servers, 'projects' => $projects]);
+//    $username = $app['security.token_storage']->getToken()->getUser()->getUsername();
+//    $userservice = new \PNWPHP\SSC\Service\UserService($app['db']);
+//    $projects = $userservice->getProjectsForUser($username);
+    return $app['twig']->render('serverlist.html', ['servers' => $servers]);
 });

@@ -3,7 +3,9 @@
 	"name": "describeInstances",
 	"response": {
 		"NextToken": "abcde",
-		"Reservations": {
+		"Reservations":
+        [
+            {
     
             "Groups": [
                 {
@@ -134,11 +136,13 @@
                 "VirtualizationType": "hvm|paravirtual",
                 "VpcId": "<string>"
             }
-            ]
-        },
-        "OwnerId": "<string>",
-        "RequesterId": "<string>",
-        "ReservationId": "<string>"
+            ],
+            "OwnerId": "<string>",
+            "RequesterId": "<string>",
+            "ReservationId": "<string>"
+        }
+
+        ]
     }
 },
     {
