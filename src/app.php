@@ -40,7 +40,7 @@ $app['twig'] = $app->share($app->extend('twig', function ($twig, $app) {
 }));
 
 $app['AWSFetcher'] = $app->share(function() use ($app) {
-    return new PNWPHP\SSC\Service\AWSFetcher();
+    return new PNWPHP\SSC\Service\AWSFetcher($app['pdo'], new \PNWPHP\SSC\Service\EC2Service());
 });
 
 return $app;

@@ -5,11 +5,12 @@ namespace PNWPHP\SSC\Service;
 class AWSFetcher
 {
     private $pdo;
+    private $ec2;
 
     public function __construct(\PDO $pdo, EC2Service $ec2)
     {
         $this->pdo = $pdo;
-        $this->aws = $aws;
+        $this->ec2 = $ec2;
     }
 
     /**
