@@ -3,7 +3,6 @@
     <head>
         <title>{% block title '' %} - SSC</title>
 
-        <link href="{{ app.request.basepath }}/css/main.css" rel="stylesheet" type="text/css" />
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 
         <script type="text/javascript">
@@ -41,7 +40,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My projects <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 {% for project in projects %}
-                                <li><a href="/{{project}}/servers">{{project}}</a></li>
+                                <li><a href="/{{project.id}}/servers">{{project.name}}</a></li>
                                 {% endfor %}
                             </ul>
                         </li>

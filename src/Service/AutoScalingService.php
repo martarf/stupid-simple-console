@@ -4,23 +4,21 @@ namespace PNWPHP\SSC\Service;
 
 class AutoScalingService
 {
+    private $asg;
+
+    public function __construct(\Aws\Sdk $sdk)
+    {
+        $this->asg = $sdk->createAutoScaling();
+    }
+
     public function getStatusList(array $grouplist)
     {
-        $data = json_decode(file_get_contents(dirname(dirname(__DIR__)) . '/config/responses.json'), true);
+        $data = $this->asg->describeAutoScalingGroups();
 
-        $response = null;
-        foreach($data as $rsp) {
-            if($rsp['name'] === 'describeAutoScalingGroups') {
-                $response = $rsp['response']['AutoScalingGroups'];
-            }
-        }
-
-        if($response === null) {
-            throw new \Exception('Could not find fake data for server groups.');
-        }
+        $groups = $data['AutoScalingGroups'];
 
         // TODO: filter based on input
-        return array_map(function($g){return $this->processGroup($g);}, $response);
+        return array_map(function($g){return $this->processGroup($g);}, $groups);
     }
 
     private function processGroup($group)

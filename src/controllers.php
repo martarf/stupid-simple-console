@@ -44,8 +44,7 @@ $app->error(function (\Exception $e, $code) use ($app) {
 
 $app->get('projects/{project_id}/servers', function($project_id) use ($app) {
     $servers  = $app['AWSFetcher']->getServerListForProject($project_id);
-    $username = $app['security.token_storage']->getToken()->getUser()->getUsername();
-    $userservice = new \PNWPHP\SSC\Service\UserService($app['db']);
-    $projects = $userservice->getProjectsForUser($username);
+    $user = $app['security.token_storage']->getToken()->getUser();
+    $projects = $app['UserService']->getProjectsForUser($user);
     return $app['twig']->render('serverlist.html', ['servers' => $servers, 'projects' => $projects]);
 });
