@@ -41,7 +41,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My projects <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 {% for project in projects %}
-                                <li><a href="/{{project}}/servers">{{project}}</a></li>
+                                <li><a href="/{{project.id}}/servers">{{project.name}}</a></li>
                                 {% endfor %}
                             </ul>
                         </li>

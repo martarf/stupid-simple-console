@@ -35,9 +35,6 @@ $app->register(new AwsServiceProvider(), [
 
 $app->register(new Silex\Provider\SessionServiceProvider());
 
-//@todo define DoctrineServiceProvider
-$app['db'] = null;
-
 $app->register(new Silex\Provider\SecurityServiceProvider(), array(
     'security.firewalls' => array(
         'login_path' => array(
@@ -56,7 +53,7 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
                 'invalidate_session' => false
             ),
             'users' => $app->share(function($app) {
-                return new PNWPHP\SSC\Service\UserService($app);
+                return new PNWPHP\SSC\Service\UserService($app['pdo']);
             }),
         )
     ),
@@ -76,8 +73,12 @@ $app['AWSFetcher'] = $app->share(function() use ($app) {
     return new PNWPHP\SSC\Service\AWSFetcher(
         $app['pdo'],
         new \PNWPHP\SSC\Service\EC2Service(),
-        new \PNWPHP\SSC\Service\AutoScalingService()
+        new \PNWPHP\SSC\Service\AutoScalingService($app['aws'])
     );
 });
+
+$app['UserService'] = function() use ($app) {
+    return new \PNWPHP\SSC\Service\UserService($app['pdo']);
+};
 
 return $app;

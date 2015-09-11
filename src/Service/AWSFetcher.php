@@ -31,7 +31,7 @@ class AWSFetcher
         //try{
             //$query = $this->pdo->prepare($sql);
             //$query->execute(['pid' => $projectId]);
-            //$data = $query->fetchAll(\PDO::FETCH_COLUMN);
+            //$data = $query->fetchAll(\PDO::FETCH_ASSOC);
         //} catch(\PDOException $e) {
             //// TODO: Fail safe
             //throw $e;
