@@ -3,7 +3,7 @@
         "name": "describeInstances",
         "response": {
             "NextToken": "abcde",
-            "Reservations": {
+            "Reservations": [{
 
                 "Groups": [
                     {
@@ -135,7 +135,7 @@
                         "VpcId": "<string>"
                     }
                 ]
-            },
+            }],
             "OwnerId": "<string>",
             "RequesterId": "<string>",
             "ReservationId": "<string>"

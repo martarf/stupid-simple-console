@@ -41,7 +41,6 @@ class AWSFetcher
         $singleServers = array_filter($data, function($s) {
             return $s['type'] === 'single';
         });
-
         $groupServers = array_filter($data, function($s) {
             return $s['type'] === 'group';
         });
@@ -50,11 +49,11 @@ class AWSFetcher
         $groupStatus = $this->asg->getStatusList($groupServers);
 
         $singleStatus = array_map(function($status) {
-             return new ServerStatus($status['name'], $status['status'], false, 1);
+            return new ServerStatus($status['name'], $status['status'], false, 1);
         }, $singleStatus);
 
         $groupStatus = array_map(function($status) {
-             return new ServerStatus($status['name'], $status['status'], true, $status['count']);
+            return new ServerStatus($status['name'], $status['status'], true, $status['count']);
         }, $groupStatus);
 
         return array_merge($singleStatus, $groupStatus);
