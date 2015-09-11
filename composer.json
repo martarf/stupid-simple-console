@@ -22,7 +22,8 @@
         "symfony/twig-bridge": "~2.3",
         "symfony/validator": "~2.3",
         "aws/aws-sdk-php": "^3.3",
-        "aws/aws-sdk-php-silex": "^2.0"
+        "aws/aws-sdk-php-silex": "^2.0",
+        "herrera-io/silex-pdo": "^1.2"
     },
     "autoload": {
         "psr-4": { "PNWPHP\\SSC\\": "src/" }

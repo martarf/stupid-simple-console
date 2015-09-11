@@ -2,14 +2,17 @@
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 
+use Aws\Silex\AwsServiceProvider;
+use Herrera\Pdo\PdoServiceProvider;
 use Silex\Application;
 use Silex\Provider\TwigServiceProvider;
 use Silex\Provider\UrlGeneratorServiceProvider;
 use Silex\Provider\ValidatorServiceProvider;
 use Silex\Provider\ServiceControllerServiceProvider;
-use Aws\Silex\AwsServiceProvider;
 
 $app = new Application();
+
+// Defaults
 $app->register(new UrlGeneratorServiceProvider());
 $app->register(new ValidatorServiceProvider());
 $app->register(new ServiceControllerServiceProvider());
@@ -17,7 +20,13 @@ $app->register(new TwigServiceProvider());
 $app->register(new Silex\Provider\HttpFragmentServiceProvider());
 $app->register(new Silex\Provider\SessionServiceProvider());
 
+// DB
+$dbPath = dirname(__DIR__) . '/db/db.sqlite';
+$app->register(new PdoServiceProvider(), [
+    'pdo.dsn' => 'sqlite:' . $dbPath,
+]);
 
+// AWS
 $app->register(new AwsServiceProvider(), [
     'aws.config' => [
         'version' => 'latest',

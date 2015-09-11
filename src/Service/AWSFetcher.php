@@ -4,16 +4,53 @@ namespace PNWPHP\SSC\Service;
 
 class AWSFetcher
 {
+    private $pdo;
+
+    public function __construct(\PDO $pdo, EC2Service $ec2)
+    {
+        $this->pdo = $pdo;
+        $this->aws = $aws;
+    }
+
     /**
      * @param string $projectName The name of the project
      * @return PNWPHP\SSC\Data\ServerStatus[] List of server statuses
      */
-    public function getServerListForProject($projectName)
+    public function getServerListForProject($projectId)
     {
-        $server1 = new \PNWPHP\SSC\Data\ServerStatus("server1",true,true,1);
-        $server2 = new \PNWPHP\SSC\Data\ServerStatus("server2",false,false,2);
-        $server3 = new \PNWPHP\SSC\Data\ServerStatus("server3",true,true,3);
-        $server4 = new \PNWPHP\SSC\Data\ServerStatus("server4",true,true,4);
-        return [$server1,$server2,$server3,$server4];
+        $sql =
+            'SELECT `Server`.`Server_Name` as `name`, `Server`.`ARN` as `arn`, `Server`.`Type` as `type` ' .
+            'FROM `Server` WHERE `Server`.`arn` in ' .
+            '(SELECT `Project_Server`.`arn` FROM `Project_Server` WHERE `Project_Server`.`Project_ID` = :pid)';
+
+        try{
+            $query = $this->pdo->prepare($sql);
+            $query->execute(['pid' => $projectId]);
+            $data = $query->fetchAll(\PDO::FETCH_COLUMN);
+        } catch(\PDOException $e) {
+            // TODO: Fail safe
+            throw $e;
+        }
+
+        $singleServers = array_filter($data, function($s) {
+            return $s['type'] === 'single';
+        });
+
+        $groupServers = array_filter($data, function($s) {
+            return $s['type'] === 'group';
+        });
+
+        $singleStatus = $this->ec2->getStatusList($singleServers);
+        $groupStatus = $this->asg->getStatusList($groupServers);
+
+        $singleStatus = array_map(function($status) {
+             return new ServerStatus($status['name'], $status['status'], false, 1);
+        }, $singleStatus);
+
+        $groupStatus = array_map(function($status) {
+             return new ServerStatus($status['name'], $status['status'], true, $status['count']);
+        }, $singleStatus);
+
+        return array_merge($singleStatus, $groupStatus);
     }
 }
