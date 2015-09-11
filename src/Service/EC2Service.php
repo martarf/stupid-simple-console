@@ -39,7 +39,7 @@ class EC2Service {
             'name' => 'someFakeName',
             'type' => 'single',
             'arn' => $instance['InstanceId'],
-            'status' => $instance["State"]["Code"] = 0,
+            'status' => $instance["State"]["Code"] == 0,
             'count' => 1
         ];
         
