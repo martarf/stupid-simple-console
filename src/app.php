@@ -1,5 +1,6 @@
 <?php
 
+date_default_timezone_set('America/Los_Angeles');
 use Aws\Silex\AwsServiceProvider;
 use Herrera\Pdo\PdoServiceProvider;
 use Silex\Application;
@@ -38,7 +39,11 @@ $app['twig'] = $app->share($app->extend('twig', function ($twig, $app) {
 }));
 
 $app['AWSFetcher'] = $app->share(function() use ($app) {
-    return new PNWPHP\SSC\Service\AWSFetcher($app['pdo'], new \PNWPHP\SSC\Service\EC2Service());
+    return new PNWPHP\SSC\Service\AWSFetcher(
+        $app['pdo'],
+        new \PNWPHP\SSC\Service\EC2Service(),
+        new \PNWPHP\SSC\Service\AutoScalingService()
+    );
 });
 
 return $app;

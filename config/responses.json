@@ -1,198 +1,200 @@
 [
-{
-	"name": "describeInstances",
-	"response": {
-		"NextToken": "abcde",
-		"Reservations": {
-    
-            "Groups": [
-                {
-                    "GroupId": "1234",
-                    "GroupName": "Security Group 1"
-                }
-            ],
-        	"Instances": [
-            {
-                "AmiLaunchIndex": "1",
-                "Architecture": "i386|x86_64",
-                "BlockDeviceMappings": [
+    {
+        "name": "describeInstances",
+        "response": {
+            "NextToken": "abcde",
+            "Reservations": {
+
+                "Groups": [
                     {
-                        "DeviceName": "Test Device Name",
-                        "Ebs": {
-                            "AttachTime": "12-12-2012",
-                            "DeleteOnTermination": false,
-                            "Status": "attached",
-                            "VolumeId": "abcde"
-                        }
+                        "GroupId": "1234",
+                        "GroupName": "Security Group 1"
                     }
                 ],
-                "ClientToken": "abcde",
-                "EbsOptimized": true,
-                "Hypervisor": "xen",
-                "IamInstanceProfile": {
-                    "Arn": "<string>",
-                    "Id": "<string>"
-                },
-                "ImageId": "<string>",
-                "InstanceId": "abcde",
-                "InstanceLifecycle": "spot",
-                "InstanceType": "t1.micro|m1.small|m1.medium|m1.large|m1.xlarge|m3.medium|m3.large|m3.xlarge|m3.2xlarge|m4.large|m4.xlarge|m4.2xlarge|m4.4xlarge|m4.10xlarge|t2.micro|t2.small|t2.medium|t2.large|m2.xlarge|m2.2xlarge|m2.4xlarge|cr1.8xlarge|i2.xlarge|i2.2xlarge|i2.4xlarge|i2.8xlarge|hi1.4xlarge|hs1.8xlarge|c1.medium|c1.xlarge|c3.large|c3.xlarge|c3.2xlarge|c3.4xlarge|c3.8xlarge|c4.large|c4.xlarge|c4.2xlarge|c4.4xlarge|c4.8xlarge|cc1.4xlarge|cc2.8xlarge|g2.2xlarge|cg1.4xlarge|r3.large|r3.xlarge|r3.2xlarge|r3.4xlarge|r3.8xlarge|d2.xlarge|d2.2xlarge|d2.4xlarge|d2.8xlarge",
-                "KernelId": "<string>",
-                "KeyName": "<string>",
-                "LaunchTime": "12-12-2012",
-                "Monitoring": {
-                    "State": "enabled"
-                },
-                "NetworkInterfaces": [
+                "Instances": [
                     {
-                        "Association": {
-                            "IpOwnerId": "<string>",
-                            "PublicDnsName": "<string>",
-                            "PublicIp": "<string>"
-                        },
-                        "Attachment": {
-                            "AttachTime": "12-12-2012",
-                            "AttachmentId": "<string>",
-                            "DeleteOnTermination": true,
-                            "DeviceIndex": "1",
-                            "Status": "attached"
-                        },
-                        "Description": "<string>",
-                        "Groups": [
+                        "AmiLaunchIndex": "1",
+                        "Architecture": "i386|x86_64",
+                        "BlockDeviceMappings": [
                             {
-                                "GroupId": "<string>",
-                                "GroupName": "<string>"
+                                "DeviceName": "Test Device Name",
+                                "Ebs": {
+                                    "AttachTime": "12-12-2012",
+                                    "DeleteOnTermination": false,
+                                    "Status": "attached",
+                                    "VolumeId": "abcde"
+                                }
                             }
                         ],
-                        "MacAddress": "<string>",
-                        "NetworkInterfaceId": "<string>",
-                        "OwnerId": "<string>",
-                        "PrivateDnsName": "<string>",
-                        "PrivateIpAddress": "<string>",
-                        "PrivateIpAddresses": [
+                        "ClientToken": "abcde",
+                        "EbsOptimized": true,
+                        "Hypervisor": "xen",
+                        "IamInstanceProfile": {
+                            "Arn": "<string>",
+                            "Id": "<string>"
+                        },
+                        "ImageId": "<string>",
+                        "InstanceId": "abcde",
+                        "InstanceLifecycle": "spot",
+                        "InstanceType": "t1.micro|m1.small|m1.medium|m1.large|m1.xlarge|m3.medium|m3.large|m3.xlarge|m3.2xlarge|m4.large|m4.xlarge|m4.2xlarge|m4.4xlarge|m4.10xlarge|t2.micro|t2.small|t2.medium|t2.large|m2.xlarge|m2.2xlarge|m2.4xlarge|cr1.8xlarge|i2.xlarge|i2.2xlarge|i2.4xlarge|i2.8xlarge|hi1.4xlarge|hs1.8xlarge|c1.medium|c1.xlarge|c3.large|c3.xlarge|c3.2xlarge|c3.4xlarge|c3.8xlarge|c4.large|c4.xlarge|c4.2xlarge|c4.4xlarge|c4.8xlarge|cc1.4xlarge|cc2.8xlarge|g2.2xlarge|cg1.4xlarge|r3.large|r3.xlarge|r3.2xlarge|r3.4xlarge|r3.8xlarge|d2.xlarge|d2.2xlarge|d2.4xlarge|d2.8xlarge",
+                        "KernelId": "<string>",
+                        "KeyName": "<string>",
+                        "LaunchTime": "12-12-2012",
+                        "Monitoring": {
+                            "State": "enabled"
+                        },
+                        "NetworkInterfaces": [
                             {
                                 "Association": {
                                     "IpOwnerId": "<string>",
                                     "PublicDnsName": "<string>",
                                     "PublicIp": "<string>"
                                 },
-                                "Primary": true,
+                                "Attachment": {
+                                    "AttachTime": "12-12-2012",
+                                    "AttachmentId": "<string>",
+                                    "DeleteOnTermination": true,
+                                    "DeviceIndex": "1",
+                                    "Status": "attached"
+                                },
+                                "Description": "<string>",
+                                "Groups": [
+                                    {
+                                        "GroupId": "<string>",
+                                        "GroupName": "<string>"
+                                    }
+                                ],
+                                "MacAddress": "<string>",
+                                "NetworkInterfaceId": "<string>",
+                                "OwnerId": "<string>",
                                 "PrivateDnsName": "<string>",
-                                "PrivateIpAddress": "<string>"
+                                "PrivateIpAddress": "<string>",
+                                "PrivateIpAddresses": [
+                                    {
+                                        "Association": {
+                                            "IpOwnerId": "<string>",
+                                            "PublicDnsName": "<string>",
+                                            "PublicIp": "<string>"
+                                        },
+                                        "Primary": true,
+                                        "PrivateDnsName": "<string>",
+                                        "PrivateIpAddress": "<string>"
+                                    }
+                                ],
+                                "SourceDestCheck": true,
+                                "Status": "available",
+                                "SubnetId": "<string>",
+                                "VpcId": "<string>"
+                            }
+                        ],
+                        "Placement": {
+                            "AvailabilityZone": "<string>",
+                            "GroupName": "<string>",
+                            "Tenancy": "default|dedicated"
+                        },
+                        "Platform": "Windows",
+                        "PrivateDnsName": "<string>",
+                        "PrivateIpAddress": "<string>",
+                        "ProductCodes": [
+                            {
+                                "ProductCodeId": "<string>",
+                                "ProductCodeType": "devpay|marketplace"
+                            }
+                        ],
+                        "PublicDnsName": "<string>",
+                        "PublicIpAddress": "<string>",
+                        "RamdiskId": "<string>",
+                        "RootDeviceName": "<string>",
+                        "RootDeviceType": "ebs|instance-store",
+                        "SecurityGroups": [
+                            {
+                                "GroupId": "<string>",
+                                "GroupName": "<string>"
                             }
                         ],
                         "SourceDestCheck": true,
-                        "Status": "available",
+                        "SpotInstanceRequestId": "<string>",
+                        "SriovNetSupport": "<string>",
+                        "State": {
+                            "Code": 1,
+                            "Name": "running"
+                        },
+                        "StateReason": {
+                            "Code": "<string>",
+                            "Message": "<string>"
+                        },
+                        "StateTransitionReason": "<string>",
                         "SubnetId": "<string>",
+                        "Tags": [
+                            {
+                                "Key": "<string>",
+                                "Value": "<string>"
+                            }
+                        ],
+                        "VirtualizationType": "hvm|paravirtual",
                         "VpcId": "<string>"
                     }
-                ],
-                "Placement": {
-                    "AvailabilityZone": "<string>",
-                    "GroupName": "<string>",
-                    "Tenancy": "default|dedicated"
-                },
-                "Platform": "Windows",
-                "PrivateDnsName": "<string>",
-                "PrivateIpAddress": "<string>",
-                "ProductCodes": [
-                    {
-                        "ProductCodeId": "<string>",
-                        "ProductCodeType": "devpay|marketplace"
-                    }
-                ],
-                "PublicDnsName": "<string>",
-                "PublicIpAddress": "<string>",
-                "RamdiskId": "<string>",
-                "RootDeviceName": "<string>",
-                "RootDeviceType": "ebs|instance-store",
-                "SecurityGroups": [
-                    {
-                        "GroupId": "<string>",
-                        "GroupName": "<string>"
-                    }
-                ],
-                "SourceDestCheck": true,
-                "SpotInstanceRequestId": "<string>",
-                "SriovNetSupport": "<string>",
-                "State": {
-                    "Code": 1,
-                    "Name": "running"
-                },
-                "StateReason": {
-                    "Code": "<string>",
-                    "Message": "<string>"
-                },
-                "StateTransitionReason": "<string>",
-                "SubnetId": "<string>",
-                "Tags": [
-                    {
-                        "Key": "<string>",
-                        "Value": "<string>"
-                    }
-                ],
-                "VirtualizationType": "hvm|paravirtual",
-                "VpcId": "<string>"
-            }
-            ]
-        },
-        "OwnerId": "<string>",
-        "RequesterId": "<string>",
-        "ReservationId": "<string>"
-    }
-},
+                ]
+            },
+            "OwnerId": "<string>",
+            "RequesterId": "<string>",
+            "ReservationId": "<string>"
+        }
+    },
     {
         "name": "describeAutoScalingGroups",
         "response": {
             "AutoScalingGroups":
-            {
-                "AutoScalingGroupARN": "<string>",
-                "AutoScalingGroupName": "<string>",
-                "AvailabilityZones": ["<string>", "<string>"],
-                "CreatedTime": "12-12-2012",
-                "DefaultCooldown": 1,
-                "DesiredCapacity": 1,
-                "EnabledMetrics": [
-                    {
-                        "Granularity": "<string>",
-                        "Metric": "<string>"
-                    }
-                ],
-                "HealthCheckGracePeriod": 1,
-                "HealthCheckType": "<string>",
-                "Instances": [
-                    {
-                        "AvailabilityZone": "<string>",
-                        "HealthStatus": "<string>",
-                        "InstanceId": "abcdf",
-                        "LaunchConfigurationName": "<string>",
-                        "LifecycleState": "InService"
-                    }
-                ],
-                "LaunchConfigurationName": "<string>",
-                "LoadBalancerNames": ["<string>", "<string>"],
-                "MaxSize": 1,
-                "MinSize": 2,
-                "PlacementGroup": "<string>",
-                "Status": "<string>",
-                "SuspendedProcesses": [
-                    {
-                        "ProcessName": "<string>",
-                        "SuspensionReason": "<string>"
-                    }
-                ],
-                "Tags": [
-                    {
-                    "Key": "<string>",
-                    "PropagateAtLaunch": true,
-                    "ResourceId": "<string>",
-                    "ResourceType": "<string>",
-                    "Value": "<string>"
-                    }
-                ],
-                "TerminationPolicies": ["<string>", "<string>"],
-                "VPCZoneIdentifier": "<string>"
-            },
+            [
+                {
+                    "AutoScalingGroupARN": "<string>",
+                    "AutoScalingGroupName": "<string>",
+                    "AvailabilityZones": ["<string>", "<string>"],
+                    "CreatedTime": "12-12-2012",
+                    "DefaultCooldown": 1,
+                    "DesiredCapacity": 1,
+                    "EnabledMetrics": [
+                        {
+                            "Granularity": "<string>",
+                            "Metric": "<string>"
+                        }
+                    ],
+                    "HealthCheckGracePeriod": 1,
+                    "HealthCheckType": "<string>",
+                    "Instances": [
+                        {
+                            "AvailabilityZone": "<string>",
+                            "HealthStatus": "<string>",
+                            "InstanceId": "abcdf",
+                            "LaunchConfigurationName": "<string>",
+                            "LifecycleState": "InService"
+                        }
+                    ],
+                    "LaunchConfigurationName": "<string>",
+                    "LoadBalancerNames": ["<string>", "<string>"],
+                    "MaxSize": 1,
+                    "MinSize": 2,
+                    "PlacementGroup": "<string>",
+                    "Status": "<string>",
+                    "SuspendedProcesses": [
+                        {
+                            "ProcessName": "<string>",
+                            "SuspensionReason": "<string>"
+                        }
+                    ],
+                    "Tags": [
+                        {
+                            "Key": "<string>",
+                            "PropagateAtLaunch": true,
+                            "ResourceId": "<string>",
+                            "ResourceType": "<string>",
+                            "Value": "<string>"
+                        }
+                    ],
+                    "TerminationPolicies": ["<string>", "<string>"],
+                    "VPCZoneIdentifier": "<string>"
+                }
+            ],
             "NextToken": "<string>"
         }
     }

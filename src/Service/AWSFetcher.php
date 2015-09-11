@@ -2,15 +2,19 @@
 
 namespace PNWPHP\SSC\Service;
 
+use PNWPHP\SSC\Data\ServerStatus;
+
 class AWSFetcher
 {
     private $pdo;
     private $ec2;
+    private $asg;
 
-    public function __construct(\PDO $pdo, EC2Service $ec2)
+    public function __construct(\PDO $pdo, EC2Service $ec2, AutoScalingService $asg)
     {
         $this->pdo = $pdo;
         $this->ec2 = $ec2;
+        $this->asg = $asg;
     }
 
     /**
@@ -19,20 +23,21 @@ class AWSFetcher
      */
     public function getServerListForProject($projectId)
     {
-        $sql =
-            'SELECT `Server`.`Server_Name` as `name`, `Server`.`ARN` as `arn`, `Server`.`Type` as `type` ' .
-            'FROM `Server` WHERE `Server`.`arn` in ' .
-            '(SELECT `Project_Server`.`arn` FROM `Project_Server` WHERE `Project_Server`.`Project_ID` = :pid)';
+        //$sql =
+            //'SELECT `Server`.`Server_Name` as `name`, `Server`.`ARN` as `arn`, `Server`.`Type` as `type` ' .
+            //'FROM `Server` WHERE `Server`.`arn` in ' .
+            //'(SELECT `Project_Server`.`arn` FROM `Project_Server` WHERE `Project_Server`.`Project_ID` = :pid)';
 
-        try{
-            $query = $this->pdo->prepare($sql);
-            $query->execute(['pid' => $projectId]);
-            $data = $query->fetchAll(\PDO::FETCH_COLUMN);
-        } catch(\PDOException $e) {
-            // TODO: Fail safe
-            throw $e;
-        }
+        //try{
+            //$query = $this->pdo->prepare($sql);
+            //$query->execute(['pid' => $projectId]);
+            //$data = $query->fetchAll(\PDO::FETCH_COLUMN);
+        //} catch(\PDOException $e) {
+            //// TODO: Fail safe
+            //throw $e;
+        //}
 
+        $data = [];
         $singleServers = array_filter($data, function($s) {
             return $s['type'] === 'single';
         });
@@ -50,7 +55,7 @@ class AWSFetcher
 
         $groupStatus = array_map(function($status) {
              return new ServerStatus($status['name'], $status['status'], true, $status['count']);
-        }, $singleStatus);
+        }, $groupStatus);
 
         return array_merge($singleStatus, $groupStatus);
     }
